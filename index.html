@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNova | Latest Technology News</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-bar {
+            display: flex;
+            background: var(--bg-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            outline: none;
+            width: 120px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero {
+            padding: 40px 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .main-article {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: flex-end;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+        }
+
+        .main-article img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            width: 100%;
+            color: white;
+        }
+
+        .tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin: 15px 0;
+            line-height: 1.2;
+        }
+
+        .sub-article {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .sub-item {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .sub-item:last-child {
+            border-bottom: none;
+        }
+
+        .sub-item:hover h4 {
+            color: var(--primary-color);
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .section-title {
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+            font-size: 1.5rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding-bottom: 30px;
+        }
+
+        .news-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .card-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .loader {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+
+        .contact-section {
+            display: none;
+            padding: 50px 0;
+            background: var(--card-bg);
+            margin-top: 40px;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            align-self: flex-start;
+        }
+
+        footer {
+            background: var(--card-bg);
+            padding: 50px 0 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .social-icons {
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: var(--text-muted);
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            margin: 0 15px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+
+            .nav-links,
+            .search-bar {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-article {
+                height: 300px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<script src="script.js"></script>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo" onclick="showHome()">Tech<span>Nova</span>.</a>
+            <nav class="nav-links">
+                <a onclick="showHome()">Home</a>
+                <a onclick="filterByCategory('technology')">Tech</a>
+                <a onclick="filterByCategory('science')">Science</a>
+                <a onclick="showContact()">Contact</a>
+            </nav>
+            <div class="nav-controls">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Search..." onkeypress="handleSearch(event)">
+                    <i class="fas fa-search" style="color: var(--text-muted); cursor: pointer;"
+                        onclick="performSearch()"></i>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"
+                        id="theme-icon"></i></button>
+                <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a onclick="showHome(); toggleMobileMenu()">Home</a>
+            <a onclick="filterByCategory('technology'); toggleMobileMenu()">Technology</a>
+            <a onclick="filterByCategory('science'); toggleMobileMenu()">Science</a>
+            <a onclick="showContact(); toggleMobileMenu()">Contact</a>
+        </div>
+    </header>
+
+    <main class="container" id="main-content">
+        <section class="hero" id="hero-section">
+            <div class="hero-grid">
+                <div class="main-article" id="main-article">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e" alt="Featured"
+                        id="main-img">
+                    <div class="hero-content">
+                        <span class="tag" id="main-tag">Loading...</span>
+                        <h1 class="hero-title" id="main-title">Loading news...</h1>
+                        <p id="main-desc">Please wait...</p>
+                    </div>
+                </div>
+                <div class="sub-article">
+                    <h3>Top Stories</h3>
+                    <div id="top-stories-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="categories" id="categories-section">
+            <button class="category-btn active" onclick="filterByCategory('general', this)">All</button>
+            <button class="category-btn" onclick="filterByCategory('technology', this)">Technology</button>
+            <button class="category-btn" onclick="filterByCategory('science', this)">Science</button>
+            <button class="category-btn" onclick="filterByCategory('business', this)">Business</button>
+            <button class="category-btn" onclick="filterByCategory('entertainment', this)">Entertainment</button>
+        </div>
+
+        <h2 class="section-title" id="section-title">Latest News</h2>
+        <div class="loader" id="loader"><i class="fas fa-spinner fa-spin"></i> Loading news...</div>
+        <div class="news-grid" id="news-container"></div>
+    </main>
+
+    <section class="contact-section" id="contact-section">
+        <div class="contact-container">
+            <h2 class="section-title">Contact Us</h2>
+            <p style="margin-bottom: 20px; color: var(--text-muted);">Have a news tip? We'd love to hear from you!</p>
+            <form class="contact-form" onsubmit="submitContact(event)">
+                <div class="form-group"><input type="text" placeholder="Your Name" required></div>
+                <div class="form-group"><input type="email" placeholder="Your Email" required></div>
+                <div class="form-group"><textarea placeholder="Your Message" required></textarea></div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <p class="copyright">&copy; 2024 TechNova Media. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let mainArticle = {};
+        let currentCategory = 'technology';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadNews();
+            checkTheme();
+        });
+
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function checkTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('active');
+        }
+
+        function showHome() {
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('contact-section').style.display = 'none';
+            document.getElementById('hero-section').style.display = 'block';
+            document.getElementById('categories-section').style.display = 'flex';
+        }
+
+        function showContact() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('contact-section').style.display = 'block';
+        }
+
+        function submitContact(e) {
+            e.preventDefault();
+            alert('Message sent! (Demo only)');
+        }
+        async function loadNews() {
+            const loader = document.getElementById('loader');
+            const container = document.getElementById('news-container');
+            const topStoriesContainer = document.getElementById('top-stories-container');
+
+            container.innerHTML = '';
+            topStoriesContainer.innerHTML = '';
+            loader.style.display = 'block';
+
+            try {
+
+                const response = await fetch(
+                    `/.netlify/functions/news?category=${currentCategory}`
+                );
+
+
+                const data = await response.json();
+                const articles = data.articles;
+
+                if (!articles || articles.length === 0) {
+                    loader.innerHTML = "No news found.";
+                    return;
+                }
+
+                // MAIN ARTICLE
+                mainArticle = articles[0];
+                document.getElementById('main-img').src = mainArticle.image;
+                document.getElementById('main-tag').textContent = currentCategory;
+                document.getElementById('main-title').textContent = mainArticle.title;
+                document.getElementById('main-desc').textContent = mainArticle.description;
+
+                // TOP STORIES
+                articles.slice(1, 4).forEach(article => {
+                    const div = document.createElement('div');
+                    div.className = 'sub-item';
+                    div.innerHTML = `
+                <h4>${article.title}</h4>
+                <small>${article.source.name}</small>
+            `;
+                    div.onclick = () => window.open(article.url, '_blank');
+                    topStoriesContainer.appendChild(div);
+                });
+
+                // NEWS GRID
+                articles.slice(4).forEach(article => {
+                    const card = document.createElement('div');
+                    card.className = 'news-card';
+
+                    card.innerHTML = `
+                <img class="card-image" src="${article.image}">
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span>${article.source.name}</span>
+                        <span>${new Date(article.publishedAt).toLocaleDateString()}</span>
+                    </div>
+                    <h3 class="card-title">${article.title}</h3>
+                    <p class="card-excerpt">${article.description}</p>
+                    <a class="read-more" href="${article.url}" target="_blank">Read More →</a>
+                </div>
+            `;
+
+                    container.appendChild(card);
+                });
+
+                loader.style.display = 'none';
+
+            } catch (error) {
+                loader.innerHTML = "⚠️ Failed to load news.";
+                console.error(error);
+            }
+        }
+        function filterByCategory(category, button) {
+            currentCategory = category;
+            loadNews();
+
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            button.classList.add('active');
+        }
+        function handleSearch(event) {
+            if (event.key === "Enter") {
+                performSearch();
+            }
+        }
+      function performSearch() {
+    alert("Search will be added after backend is fully working.");
+}
+</script>
